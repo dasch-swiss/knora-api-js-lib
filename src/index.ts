@@ -1,6 +1,7 @@
 // Globally necessary files
 import { DefaultObjectAccessPermissionsResponse } from "./models/admin/default-object-access-permissions-response";
 import { DefaultObjectAccessPermission } from "./models/admin/default-object-access-permission";
+import { UpdateAdministrativePermissionGroup } from "./models/admin/update-administrative-permission-group";
 
 export { KnoraApiConnection } from "./knora-api-connection";
 export { KnoraApiConfig } from "./knora-api-config";
@@ -42,11 +43,14 @@ export { MembersResponse } from "./models/admin/members-response";
 export { AdministrativePermission } from "./models/admin/administrative-permission";
 export { DefaultObjectAccessPermission } from "./models/admin/default-object-access-permission";
 export { CreateAdministrativePermission } from "./models/admin/create-administrative-permission";
+export { UpdateAdministrativePermission } from "./models/admin/update-administrative-permission";
+export { UpdateAdministrativePermissionGroup } from "./models/admin/update-administrative-permission-group";
 export { StoredAdministrativePermission } from "./models/admin/stored-administrative-permission";
 export { AdministrativePermissionResponse } from "./models/admin/administrative-permission-response";
 export { AdministrativePermissionsResponse } from "./models/admin/administrative-permissions-response";
 export { Permission } from "./models/admin/permission";
 export { CreatePermission } from "./models/admin/create-permission";
+export { UpdatePermission } from "./models/admin/update-permission";
 export { Permissions } from "./models/admin/permissions";
 export { DeletePermissionResponse } from "./models/admin/delete-permission-response";
 
@@ -63,6 +67,10 @@ export { ProjectPermission } from "./models/admin/project-permission";
 export { DefaultObjectAccessPermissionsResponse } from "./models/admin/default-object-access-permissions-response";
 export { DefaultObjectAccessPermissionResponse } from "./models/admin/default-object-access-permission-response";
 export { CreateDefaultObjectAccessPermission } from "./models/admin/create-default-object-access-permission";
+export { UpdateDefaultObjectAccessPermission } from "./models/admin/update-default-object-access-permission";
+export { UpdateDefaultObjectAccessPermissionGroup } from "./models/admin/update-default-object-access-permission-group";
+export { UpdateDefaultObjectAccessPermissionResourceClass } from "./models/admin/update-default-object-access-permission-resource-class";
+export { UpdateDefaultObjectAccessPermissionProperty } from "./models/admin/update-default-object-access-permission-property";
 export { KeywordsResponse } from "./models/admin/keywords-response";
 
 export { User } from "./models/admin/user";

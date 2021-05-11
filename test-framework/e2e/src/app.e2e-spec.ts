@@ -89,6 +89,56 @@ describe('workspace-project App', () => {
 
   });
 
+  it('update an administrative permission', () => {
+
+    page.navigateTo();
+
+    // login
+    const loginButton = page.getEle('div section#login button.login');
+    loginButton.click();
+
+    const loginStatus = page.getEle('div section#login span.status');
+    expect(loginStatus.getText()).toEqual('logged in');
+
+    const button = page.getEle('div#permissions button.get-administrative-permission');
+    button.click();
+
+    const label = page.getEle('div#permissions span.status');
+    expect(label.getText()).toEqual('Permission status: getAdministrativePermission ok');
+
+    const button2 = page.getEle('div#permissions button.update-administrative-permission');
+    button2.click();
+
+    const label2 = page.getEle('div#permissions span.update-status');
+    expect(label2.getText()).toEqual('Permission update status: updateAdministrativePermission ok');
+
+  });
+
+  it('update an administrative permission\'s group', () => {
+
+    page.navigateTo();
+
+    // login
+    const loginButton = page.getEle('div section#login button.login');
+    loginButton.click();
+
+    const loginStatus = page.getEle('div section#login span.status');
+    expect(loginStatus.getText()).toEqual('logged in');
+
+    const button = page.getEle('div#permissions button.create-administrative-permission');
+    button.click();
+
+    const label = page.getEle('div#permissions span.status');
+    expect(label.getText()).toEqual('Permission status: createAdministrativePermission ok');
+
+    const button2 = page.getEle('div#permissions button.update-administrative-permission-group');
+    button2.click();
+
+    const label2 = page.getEle('div#permissions span.update-status');
+    expect(label2.getText()).toEqual('Permission update status: updateAdministrativePermissionGroup ok');
+
+  });
+
   it('delete an administrative permission', () => {
 
     page.navigateTo();
@@ -169,6 +219,106 @@ describe('workspace-project App', () => {
 
     const label = page.getEle('div#permissions span.status');
     expect(label.getText()).toEqual('Permission status: getDefaultObjectAccessPermissions ok');
+
+  });
+
+  it('update a default object access permission', () => {
+
+    page.navigateTo();
+
+    // login
+    const loginButton = page.getEle('div section#login button.login');
+    loginButton.click();
+
+    const loginStatus = page.getEle('div section#login span.status');
+    expect(loginStatus.getText()).toEqual('logged in');
+
+    const button = page.getEle('div#permissions button.get-default-object-access-permissions');
+    button.click();
+
+    const label = page.getEle('div#permissions span.status');
+    expect(label.getText()).toEqual('Permission status: getDefaultObjectAccessPermissions ok');
+
+    const button2 = page.getEle('div#permissions button.update-default-object-access-permission');
+    button2.click();
+
+    const label2 = page.getEle('div#permissions span.update-status');
+    expect(label2.getText()).toEqual('Permission update status: updateDefaultObjectAccessPermission ok');
+
+  });
+
+  it('update an administrative permission\'s group', () => {
+
+    page.navigateTo();
+
+    // login
+    const loginButton = page.getEle('div section#login button.login');
+    loginButton.click();
+
+    const loginStatus = page.getEle('div section#login span.status');
+    expect(loginStatus.getText()).toEqual('logged in');
+
+    const button = page.getEle('div#permissions button.get-default-object-access-permissions');
+    button.click();
+
+    const label = page.getEle('div#permissions span.status');
+    expect(label.getText()).toEqual('Permission status: getDefaultObjectAccessPermissions ok');
+
+    const button2 = page.getEle('div#permissions button.update-default-object-access-permission-group');
+    button2.click();
+
+    const label2 = page.getEle('div#permissions span.update-status');
+    expect(label2.getText()).toEqual('Permission update status: updateDefaultObjectAccessPermissionGroup ok');
+
+  });
+
+  it('update an administrative permission\'s resource class', () => {
+
+    page.navigateTo();
+
+    // login
+    const loginButton = page.getEle('div section#login button.login');
+    loginButton.click();
+
+    const loginStatus = page.getEle('div section#login span.status');
+    expect(loginStatus.getText()).toEqual('logged in');
+
+    const button = page.getEle('div#permissions button.get-default-object-access-permissions');
+    button.click();
+
+    const label = page.getEle('div#permissions span.status');
+    expect(label.getText()).toEqual('Permission status: getDefaultObjectAccessPermissions ok');
+
+    const button2 = page.getEle('div#permissions button.update-default-object-access-permission-resource-class');
+    button2.click();
+
+    const label2 = page.getEle('div#permissions span.update-status');
+    expect(label2.getText()).toEqual('Permission update status: updateDefaultObjectAccessPermissionResourceClass ok');
+
+  });
+
+  it('update an administrative permission\'s property', () => {
+
+    page.navigateTo();
+
+    // login
+    const loginButton = page.getEle('div section#login button.login');
+    loginButton.click();
+
+    const loginStatus = page.getEle('div section#login span.status');
+    expect(loginStatus.getText()).toEqual('logged in');
+
+    const button = page.getEle('div#permissions button.get-default-object-access-permissions');
+    button.click();
+
+    const label = page.getEle('div#permissions span.status');
+    expect(label.getText()).toEqual('Permission status: getDefaultObjectAccessPermissions ok');
+
+    const button2 = page.getEle('div#permissions button.update-default-object-access-permission-property');
+    button2.click();
+
+    const label2 = page.getEle('div#permissions span.update-status');
+    expect(label2.getText()).toEqual('Permission update status: updateDefaultObjectAccessPermissionProperty ok');
 
   });
 

@@ -25,11 +25,18 @@
             <h4>Permissions</h4>
             <button class="get-permissions" (click)="getPermissions()">Get permissions belonging to a project</button> <br /><br />
             <button class="get-administrative-permission" (click)="getAdministrativePermission()">Get administrative permission for a project and group</button> <br /><br />
+            <button class="update-administrative-permission" (click)="updateAdministrativePermission()">Update administrative permission for a project and group</button> <br /><br />
+            <button class="update-administrative-permission-group" (click)="updateAdministrativePermissionGroup()">Update an administrative permission's group</button> <br /><br />
             <button class="get-administrative-permissions" (click)="getAdministrativePermissions()">Get administrative permissions for a project</button> <br /><br />
             <button class="create-administrative-permission" (click)="createAdministrativePermission()">Create an administrative Permission</button> <br /><br />
             <button class="get-default-object-access-permissions" (click)="getDefaultObjectAccessPermissions()">Get default object access permissions for a project</button> <br /><br />
             <button class="create-default-object-access-permission" (click)="createDefaultObjectAccessPermission()">Create default object access permission for a project</button> <br /><br />
+            <button class="update-default-object-access-permission" (click)="updateDefaultObjectAccessPermission()">Update a default object access permission for a project</button> <br /><br />
+            <button class="update-default-object-access-permission-group" (click)="updateDefaultObjectAccessPermissionGroup()">Update a default object access permission's group</button> <br /><br />
+            <button class="update-default-object-access-permission-resource-class" (click)="updateDefaultObjectAccessPermissionResourceClass()">Update a default object access permission's resource class</button> <br /><br />
+            <button class="update-default-object-access-permission-property" (click)="updateDefaultObjectAccessPermissionProperty()">Update a default object access permission's property</button> <br /><br />
             <span *ngIf="permissionStatus" class="status">Permission status: {{permissionStatus}}</span>
+            <span *ngIf="permissionUpdateStatus" class="update-status">Permission update status: {{permissionUpdateStatus}}</span>
             <button class="delete-permission" (click)="deletePermission()">Delete an administrative permission</button> <br /><br />
             <span *ngIf="permissionDeleted" class="deleted">Permission deleted: {{permissionDeleted}}</span>
         </div>

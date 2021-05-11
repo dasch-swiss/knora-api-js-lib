@@ -11,6 +11,13 @@ import { DefaultObjectAccessPermissionsResponse } from "../../../models/admin/de
 import { DeletePermissionResponse } from "../../../models/admin/delete-permission-response";
 import { Permission } from "../../../models/admin/permission";
 import { ProjectPermissionsResponse } from "../../../models/admin/project-permissions-response";
+import { UpdateAdministrativePermission } from "../../../models/admin/update-administrative-permission";
+import { UpdateAdministrativePermissionGroup } from "../../../models/admin/update-administrative-permission-group";
+import { UpdateDefaultObjectAccessPermission } from "../../../models/admin/update-default-object-access-permission";
+import { UpdateDefaultObjectAccessPermissionGroup } from "../../../models/admin/update-default-object-access-permission-group";
+import { UpdateDefaultObjectAccessPermissionProperty } from "../../../models/admin/update-default-object-access-permission-property";
+import { UpdateDefaultObjectAccessPermissionResourceClass } from "../../../models/admin/update-default-object-access-permission-resource-class";
+import { UpdatePermission } from "../../../models/admin/update-permission";
 import { ApiResponseData } from "../../../models/api-response-data";
 
 describe("PermissionsEndpoint", () => {
@@ -255,6 +262,77 @@ describe("PermissionsEndpoint", () => {
 
     });
 
+    describe("Method updateAdministrativePermission", () => {
+
+        it("should update an administrative permission", done => {
+
+            const updateAdminPerm = new UpdateAdministrativePermission();
+
+            const perm = new UpdatePermission();
+            perm.additionalInformation = null;
+            perm.name = "ProjectAdminGroupAllPermission";
+            perm.permissionCode = null;
+
+            updateAdminPerm.hasPermissions = [perm];
+
+            knoraApiConnection.admin.permissionsEndpoint.updateAdministrativePermission("http://rdfh.ch/permissions/00FF/a2", updateAdminPerm).subscribe(
+                (res: ApiResponseData<AdministrativePermissionResponse>) => {
+                    expect(res.body.administrative_permission.id).toEqual("http://rdfh.ch/permissions/00FF/a2");
+                    done();
+                }
+            );
+
+            const request = jasmine.Ajax.requests.mostRecent();
+
+            const permissionUpdateResponse = require("../../../../test/data/api/admin/permissions/update-administrative-permission-hasPermissions-response.json");
+
+            request.respondWith(MockAjaxCall.mockResponse(JSON.stringify(permissionUpdateResponse)));
+
+            expect(request.url).toBe("http://localhost:3333/admin/permissions/http%3A%2F%2Frdfh.ch%2Fpermissions%2F00FF%2Fa2/hasPermissions");
+
+            expect(request.method).toEqual("PUT");
+
+            const payload = require("../../../../test/data/api/admin/permissions/update-administrative-permission-hasPermissions-request.json");
+
+            expect(request.data()).toEqual(payload);
+
+        });
+
+    });
+
+    describe("Method updateAdministrativePermissionGroup", () => {
+
+        it("should update an administrative permission's group", done => {
+
+            const updateAdminPermGroup = new UpdateAdministrativePermissionGroup();
+
+            updateAdminPermGroup.forGroup = "http://rdfh.ch/groups/00FF/images-reviewer";
+
+            knoraApiConnection.admin.permissionsEndpoint.updateAdministrativePermissionGroup("http://rdfh.ch/permissions/00FF/a2", updateAdminPermGroup).subscribe(
+                (res: ApiResponseData<AdministrativePermissionResponse>) => {
+                    expect(res.body.administrative_permission.id).toEqual("http://rdfh.ch/permissions/00FF/a2");
+                    done();
+                }
+            );
+
+            const request = jasmine.Ajax.requests.mostRecent();
+
+            const permissionUpdateResponse = require("../../../../test/data/api/admin/permissions/update-administrative-permission-forGroup-response.json");
+
+            request.respondWith(MockAjaxCall.mockResponse(JSON.stringify(permissionUpdateResponse)));
+
+            expect(request.url).toBe("http://localhost:3333/admin/permissions/http%3A%2F%2Frdfh.ch%2Fpermissions%2F00FF%2Fa2/group");
+
+            expect(request.method).toEqual("PUT");
+
+            const payload = require("../../../../test/data/api/admin/permissions/update-administrative-permission-forGroup-request.json");
+
+            expect(request.data()).toEqual(payload);
+
+        });
+
+    });
+
     describe("Method getDefaultObjectAccessPermissions", () => {
 
         it("should return all default project access permissions", done => {
@@ -400,7 +478,7 @@ describe("PermissionsEndpoint", () => {
 
         });
 
-        it("should create an  default object access permission with a custom Iri", done => {
+        it("should create an default object access permission with a custom Iri", done => {
 
             const permission = new CreatePermission();
             permission.name = "D";
@@ -439,6 +517,143 @@ describe("PermissionsEndpoint", () => {
             const payload = require("../../../../test/data/api/admin/permissions/create-defaultObjectAccess-permission-withCustomIRI-request.json");
 
             expect(request.data()).toEqual(payload);
+        });
+
+    });
+
+    describe("Method updateDefaultObjectAccessPermission", () => {
+
+        it("should update a default object access permission", done => {
+
+            const updateDefaultObjectAccessPermission = new UpdateDefaultObjectAccessPermission();
+
+            const perm = new UpdatePermission();
+            perm.additionalInformation = "http://www.knora.org/ontology/knora-admin#ProjectMember";
+            perm.name = "D";
+            perm.permissionCode = 7;
+
+            updateDefaultObjectAccessPermission.hasPermissions = [perm];
+
+            knoraApiConnection.admin.permissionsEndpoint.updateDefaultObjectAccessPermission("http://rdfh.ch/permissions/0803/003-d1", updateDefaultObjectAccessPermission).subscribe(
+                (res: ApiResponseData<DefaultObjectAccessPermissionResponse>) => {
+                    expect(res.body.defaultObjectAccessPermission.id).toEqual("http://rdfh.ch/permissions/0803/003-d1");
+                    done();
+                }
+            );
+
+            const request = jasmine.Ajax.requests.mostRecent();
+
+            const permissionUpdateResponse = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-hasPermissions-response.json");
+
+            request.respondWith(MockAjaxCall.mockResponse(JSON.stringify(permissionUpdateResponse)));
+
+            expect(request.url).toBe("http://localhost:3333/admin/permissions/http%3A%2F%2Frdfh.ch%2Fpermissions%2F0803%2F003-d1/hasPermissions");
+
+            expect(request.method).toEqual("PUT");
+
+            const payload = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-hasPermissions-request.json");
+
+            expect(request.data()).toEqual(payload);
+
+        });
+
+    });
+
+    describe("Method updateDefaultObjectAccessPermissionGroup", () => {
+
+        it("should update a default object access permission's group", done => {
+
+            const updateDOAPGroup = new UpdateDefaultObjectAccessPermissionGroup();
+
+            updateDOAPGroup.forGroup = "http://rdfh.ch/groups/00FF/images-reviewer";
+
+            knoraApiConnection.admin.permissionsEndpoint.updateDefaultObjectAccessPermissionGroup("http://rdfh.ch/permissions/0803/003-d2", updateDOAPGroup).subscribe(
+                (res: ApiResponseData<DefaultObjectAccessPermissionResponse>) => {
+                    expect(res.body.defaultObjectAccessPermission.id).toEqual("http://rdfh.ch/permissions/0803/003-d2");
+                    done();
+                }
+            );
+
+            const request = jasmine.Ajax.requests.mostRecent();
+
+            const permissionUpdateResponse = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-forGroup-response.json");
+
+            request.respondWith(MockAjaxCall.mockResponse(JSON.stringify(permissionUpdateResponse)));
+
+            expect(request.url).toBe("http://localhost:3333/admin/permissions/http%3A%2F%2Frdfh.ch%2Fpermissions%2F0803%2F003-d2/group");
+
+            expect(request.method).toEqual("PUT");
+
+            const payload = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-forGroup-request.json");
+
+            expect(request.data()).toEqual(payload);
+
+        });
+
+    });
+
+    describe("Method updateDefaultObjectAccessPermissionResourceClass", () => {
+
+        it("should update a default object access permission's resource class", done => {
+
+            const updateDOAPResClass = new UpdateDefaultObjectAccessPermissionResourceClass();
+
+            updateDOAPResClass.forResourceClass = "http://www.knora.org/ontology/0803/incunabula#book";
+
+            knoraApiConnection.admin.permissionsEndpoint.updateDefaultObjectAccessPermissionResourceClass("http://rdfh.ch/permissions/0803/003-d1", updateDOAPResClass).subscribe(
+                (res: ApiResponseData<DefaultObjectAccessPermissionResponse>) => {
+                    expect(res.body.defaultObjectAccessPermission.id).toEqual("http://rdfh.ch/permissions/0803/003-d1");
+                    done();
+                }
+            );
+
+            const request = jasmine.Ajax.requests.mostRecent();
+
+            const permissionUpdateResponse = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-forResourceClass-response.json");
+
+            request.respondWith(MockAjaxCall.mockResponse(JSON.stringify(permissionUpdateResponse)));
+
+            expect(request.url).toBe("http://localhost:3333/admin/permissions/http%3A%2F%2Frdfh.ch%2Fpermissions%2F0803%2F003-d1/resourceClass");
+
+            expect(request.method).toEqual("PUT");
+
+            const payload = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-forResourceClass-request.json");
+
+            expect(request.data()).toEqual(payload);
+
+        });
+
+    });
+
+    describe("Method updateDefaultObjectAccessPermissionProperty", () => {
+
+        it("should update a default object access permission's property", done => {
+
+            const updateDOAPProperty = new UpdateDefaultObjectAccessPermissionProperty();
+
+            updateDOAPProperty.forProperty = "http://www.knora.org/ontology/00FF/images#titel";
+
+            knoraApiConnection.admin.permissionsEndpoint.updateDefaultObjectAccessPermissionProperty("http://rdfh.ch/permissions/00FF/d1", updateDOAPProperty).subscribe(
+                (res: ApiResponseData<DefaultObjectAccessPermissionResponse>) => {
+                    expect(res.body.defaultObjectAccessPermission.id).toEqual("http://rdfh.ch/permissions/00FF/d1");
+                    done();
+                }
+            );
+
+            const request = jasmine.Ajax.requests.mostRecent();
+
+            const permissionUpdateResponse = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-forProperty-response.json");
+
+            request.respondWith(MockAjaxCall.mockResponse(JSON.stringify(permissionUpdateResponse)));
+
+            expect(request.url).toBe("http://localhost:3333/admin/permissions/http%3A%2F%2Frdfh.ch%2Fpermissions%2F00FF%2Fd1/property");
+
+            expect(request.method).toEqual("PUT");
+
+            const payload = require("../../../../test/data/api/admin/permissions/update-defaultObjectAccess-permission-forProperty-request.json");
+
+            expect(request.data()).toEqual(payload);
+
         });
 
     });
